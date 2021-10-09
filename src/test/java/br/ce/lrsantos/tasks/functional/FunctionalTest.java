@@ -116,5 +116,33 @@ public class FunctionalTest {
 		
 	}
 	
+	@Test
+	public void deveRemoverTarefa() throws MalformedURLException {
+		WebDriver driver = acessarAplicacao();
+		try {
+		//salvando tarefa
+		//Clicar em add todo
+		driver.findElement(By.id("addTodo")).click();
+		//escrever descrição
+		driver.findElement(By.id("task")).sendKeys("Teste via Selenium 2");
+		//escrever data
+		driver.findElement(By.id("dueDate")).sendKeys("10/10/9999");
+		//clicar em salvar
+		driver.findElement(By.id("saveButton")).click();
+		
+		//validar mensagem de sucesso
+		String mensagem = driver.findElement(By.id("message")).getText();
+		Assert.assertEquals("Success!", mensagem);
+		
+		//removendo tarefa
+		driver.findElement(By.xpath("//a[@class='btn btn-outline-danger btn-sm']")).click();
+		Assert.assertEquals("Success!", mensagem);
+		} finally {
+			//fechar o browser
+			driver.quit();
+		}
+		
+	}
+	
 	
 }
